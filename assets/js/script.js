@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 alert("You clicked Submit!");
             } else {
                 let gameType = this.getAttribute("data-type");
-                runGame(gameType);
+                runGame(gameType); // NOTE!! -  Eventho this code is higher in order of code, the "runGame(gameType)" is a function declared below. This is called hoisting!.
             }
         });
     }
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
 /** The main game "loop", called when the script is first loaded
  * and after the user's answer has been processed
  */
-function runGame(gameType) {
+function runGame(gameType) { 
 
     // Creates 2 random numbers from 1 to 25
     let num1 = Math.floor(Math.random() * 25) + 1;
@@ -37,8 +37,14 @@ function checkAnswer() {
 
 }
 
-function calculateCorrectAnswer() {
+/** Gets the operands (the numbers) adn the operator (plus, minus etc)
+ * directly from the DOM, and returns the correct answer.
+*/
 
+function calculateCorrectAnswer() {
+    let operand1 = parseInt(document.getElementById("operand1").innerText); // parseInt is used here because by default when getting data from the DOM, JS returns it as a string
+    let operand2 = parseInt(document.getElementById("operand2").innerText); // using parseInt will return is as an Interger(Whole number)
+    let operator = document.getElementById("operator").innerText;
 }
 
 function incrementScore() {
