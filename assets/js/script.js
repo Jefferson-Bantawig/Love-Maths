@@ -28,6 +28,8 @@ function runGame(gameType) {
         displayAdditionQuestion(num1, num2);
     } else if (gameType === "multiply") {
         displayMultiplyQuestion(num1, num2);
+    } else if (gameType === "subtract") {
+        displaySubtractQuestion(num1, num2);
     } else {
         alert(`Unknown game type: ${gameType}`);
         throw `Unknown game type: ${gameType}. Aborting!`;
@@ -68,6 +70,8 @@ function calculateCorrectAnswer() {
         return [operand1 + operand2, "addition"];
     } else if (operator === "x") {
         return [operand1 * operand2, "multiply"];
+    } else if (operator === "-") {
+        return [operand1 - operand2, "subtract"];
     } else {
         alert(`Unemplemented operator ${operator}`);
         throw `Unemplemented operator ${operator}. Aborting!`;
@@ -97,8 +101,15 @@ function displayAdditionQuestion(operand1, operand2) {
     document.getElementById("operator").textContent = "+";
 }
 
-function displaySubtractQuestion() {
-
+/** 
+ * The below uses a ternary operator which is a shorter version of if statements.
+ * operand1 > operand2 ? ---> this line is asking is operand1 bigger than operand2? 
+ * operand1 : operand2 ---> this line is saying. If operand1 bigger than operand2 then return operand1, if not(":") return operand2
+ */
+function displaySubtractQuestion(operand1, operand2) {
+    document.getElementById("operand1").textContent = operand1 > operand2 ? operand1 : operand2; // i.e (2,1) since 2>1 it will display (2), if (1,2) it will display (2 -this is returning the operand2)
+    document.getElementById("operand2").textContent = operand1 > operand2 ? operand2 : operand1; // same as the above line, (2,1) since 2>1 it will display operand2 which is "1", if (1,2) it will swap and return operand1 which is "1"
+    document.getElementById("operator").textContent = "-";
 }
 
 function displayMultiplyQuestion(operand1, operand2) {
